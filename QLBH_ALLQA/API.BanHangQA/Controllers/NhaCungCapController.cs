@@ -15,11 +15,11 @@ namespace API.BanHangQA.Controllers
         {
             _nccBusiness = nccBusiness;
         }
-        [Route("get-by-ncc/{NCC}")]
+        [Route("get-by-MaNCC/{MaNCC}")]
         [HttpGet]
-        public NhaCungCapModel GetDatabyId(string ncc)
+        public NhaCungCapModel GetDatabyId(string MaNCC)
         {
-            return _nccBusiness.GetDatabyId(ncc);
+            return _nccBusiness.GetDatabyId(MaNCC);
         }
         [Route("create-ncc")]
         [HttpPost]

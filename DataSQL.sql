@@ -10,7 +10,7 @@ CREATE TABLE LoaiTaiKhoan
 CREATE TABLE TaiKhoan
 (
 	MaTaiKhoan INT IDENTITY(1,1) PRIMARY KEY,
-	LoaiTaiKhoan INT FOREIGN KEY REFERENCES LoaiTaiKhoan(MaLoai),
+	LoaiTaiKhoan INT FOREIGN KEY REFERENCES LoaiTaiKhoan(MaLoai) on delete cascade on update cascade,
 	TenDangNhap NVARCHAR(50),
 	MatKhau NVARCHAR(50),
 )
@@ -21,42 +21,53 @@ CREATE TABLE NhaCungCap
 	SDT CHAR(11), 
 	Email VARCHAR(50),
 )
+CREATE TABLE ChuyenMuc
+(
+	MaCM VARCHAR(10) PRIMARY KEY NOT NULL,
+	MaCMC VARCHAR(10),
+	TenCM NVARCHAR(50),
+	DacBiet NVARCHAR(50),
+	NoiDung NVARCHAR(100),
+)
 CREATE TABLE SanPham
 (
 	MaSP NVARCHAR(10) PRIMARY KEY NOT NULL, 
+	MaCM VARCHAR(10) FOREIGN KEY REFERENCES ChuyenMuc(MaCM) on delete cascade on update cascade,
 	TenSP NVARCHAR(50),
 	GiaBan FLOAT,
-	GiaGoc FLOAT, 
+	GiamGia FLOAT, 
 	SoLuong INT,
 	Size CHAR(3),
 	TrangThai NVARCHAR(50),
+	LuotXem FLOAT,
 )
 CREATE TABLE ChiTietSanPham
 (
 	MaChiTietSanPham INT IDENTITY(1,1) PRIMARY KEY,
-	MaSP NVARCHAR(10) FOREIGN KEY REFERENCES SanPham(MaSP),
-	MaNCC VARCHAR(10) FOREIGN KEY REFERENCES NhaCungCap(MaNCC),
+	MaSP NVARCHAR(10) FOREIGN KEY REFERENCES SanPham(MaSP) on delete cascade on update cascade,
+	MaNCC VARCHAR(10) FOREIGN KEY REFERENCES NhaCungCap(MaNCC) on delete cascade on update cascade,
 	MoTa NVARCHAR(100),
 	ChiTiet NVARCHAR(100),
 )
 
 CREATE TABLE SanPham_NCC
 (
-	MaSP NVARCHAR(10) FOREIGN KEY REFERENCES SanPham(MaSP),
-	MaNCC VARCHAR(10) FOREIGN KEY REFERENCES NhaCungCap(MaNCC),
+	MaSP NVARCHAR(10) FOREIGN KEY REFERENCES SanPham(MaSP) on delete cascade on update cascade,
+	MaNCC VARCHAR(10) FOREIGN KEY REFERENCES NhaCungCap(MaNCC) on delete cascade on update cascade,
 	PRIMARY KEY(MaSP,MaNCC)
 )
 CREATE TABLE HoaDonNhap
 (
 	MaHDN VARCHAR(10) PRIMARY KEY NOT NULL,
-	MaNCC VARCHAR(10) FOREIGN KEY REFERENCES NhaCungCap(MaNCC),
-	NgayNhap DATE, 
+	MaNCC VARCHAR(10) FOREIGN KEY REFERENCES NhaCungCap(MaNCC) on delete cascade on update cascade,
+	NgayNhap DATETIME, 
+	KieuThanhToan NVARCHAR(30),
 )
 CREATE TABLE ChiTietHoaDonNhap
 (
 	MaCTHDN NVARCHAR(10) PRIMARY KEY NOT NULL,
-	MaHDN VARCHAR(10) FOREIGN KEY REFERENCES HoaDonNhap(MaHDN),
-	MaSP NVARCHAR(10) FOREIGN KEY REFERENCES SanPham(MaSP),
+	MaHDN VARCHAR(10) FOREIGN KEY REFERENCES HoaDonNhap(MaHDN) on delete cascade on update cascade,
+	MaSP NVARCHAR(10) FOREIGN KEY REFERENCES SanPham(MaSP) on delete cascade on update cascade,
 	SoLuongNhap  INT, 
 	Gia FLOAT,
 	TongTienTra FLOAT,
@@ -65,18 +76,19 @@ CREATE TABLE KhachHang
 (
 	MaKH NVARCHAR(10) PRIMARY KEY NOT NULL,
 	TenKH NVARCHAR(30),
-	MaSoThe varchar(10),
+	MaSoThe NVARCHAR(10),
 	GioiTinh NVARCHAR(5),
-	Diachi VARCHAR(30),
+	Diachi NVARCHAR(100),
 	Email VARCHAR(50), 
-	SDT char(10),
+	SDT CHAR(11),
 )
 CREATE TABLE HoaDon
 (
 	MaHD VARCHAR(10) PRIMARY KEY NOT NULL,
 	TenKH NVARCHAR(100),
 	DiaChi NVARCHAR(100),
-	NgayMua DATETIME,
+	NgayTao DATETIME,
+	NgayDuyet DATETIME,
 	TongGia FLOAT,
 	SDT CHAR(11),
 	DiaChiGiaoHang NVARCHAR(100),
@@ -86,8 +98,8 @@ CREATE TABLE HoaDon
 CREATE TABLE ChiTietHoaDon
 (
 	MaCTHD NVARCHAR(10) PRIMARY KEY NOT NULL,
-	MaHD VARCHAR(10) FOREIGN KEY REFERENCES HoaDon(MaHD),
-	MaSP NVARCHAR(10) FOREIGN KEY REFERENCES SanPham(MaSP),
+	MaHD VARCHAR(10) FOREIGN KEY REFERENCES HoaDon(MaHD) on delete cascade on update cascade,
+	MaSP NVARCHAR(10) FOREIGN KEY REFERENCES SanPham(MaSP) on delete cascade on update cascade,
 	SoLuong INT,
 	Size CHAR(3),
 	TongGia FLOAT,

@@ -11,13 +11,13 @@ namespace DataAccessLayer
         {
             _dbHelper = dbHelper;
         }
-        public KhachHangModel GetDatabyId(string id)
+        public KhachHangModel GetDatabyId(string MaKH)
         {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_khach_get_by_id",
-                     "@MaKH", id);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_khach_get_by_maKh",
+                     "@MaKH", MaKH);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<KhachHangModel>().FirstOrDefault();

@@ -9,7 +9,7 @@ namespace BusinessLogicLayer.Interfaces
 {
     public partial interface IKhachHangBusiness
     {
-        KhachHangModel GetDatabyId(string id);
+        KhachHangModel GetDatabyId(string MaKH);
         bool Create_KhachHang(KhachHangModel model);
         bool Update_KhachHang(KhachHangModel model);
         bool Delete_KhachHang(string model);

@@ -13,9 +13,9 @@ namespace BusinessLogicLayer
         {
             _res = res;
         }
-        public NhaCungCapModel GetDatabyId(string ncc)
+        public NhaCungCapModel GetDatabyId(string MaNCC)
         {
-            return _res.GetDatabyId(ncc);
+            return _res.GetDatabyId(MaNCC);
         }
         public bool Create_NCC(NhaCungCapModel model)
         {

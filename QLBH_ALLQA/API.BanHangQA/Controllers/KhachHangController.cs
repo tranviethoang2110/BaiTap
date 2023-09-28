@@ -15,11 +15,11 @@ namespace API.BanHangQA.Controllers
         {
             _khachHangBusiness = khachBusiness;
         }
-        [Route("get-by-id/{id}")]
+        [Route("get-by-MaKH/{MaKH}")]
         [HttpGet]
-        public KhachHangModel GetDatabyId(string id)
+        public KhachHangModel GetDatabyId(string MaKH)
         {
-            return _khachHangBusiness.GetDatabyId(id);
+            return _khachHangBusiness.GetDatabyId(MaKH);
         }
 
         [Route("create-khach")]

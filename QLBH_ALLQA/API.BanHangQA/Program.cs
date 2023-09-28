@@ -14,6 +14,9 @@ builder.Services.AddTransient<IKhachHangRepository, KhachHangRepository>();
 builder.Services.AddTransient<IKhachHangBusiness, KhachHangBusiness>();
 builder.Services.AddTransient<INhaCungCapRepository, NhaCungCapRepository>();
 builder.Services.AddTransient<INhaCungCapBusiness, NhaCungCapBusiness>();
+builder.Services.AddTransient<IChuyenMucRepository, ChuyenMucRepository>();
+builder.Services.AddTransient<IChuyenMucBusiness, ChuyenMucBusiness>();
+
 
 // Add services to the container.
 builder.Services.AddControllers();

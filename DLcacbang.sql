@@ -10,16 +10,23 @@ VALUES
     ('NCC008', N'Nguyễn Thị Hồng Nhung', '5432109876', 'ncc8@example.com');
 SELECT*FROM NhaCungCap
 
-INSERT INTO SanPham (MaSP, TenSP, GiaBan, GiaGoc, SoLuong, Size, TrangThai)
+INSERT INTO ChuyenMuc (MaCM, MaCMC, TenCM, DacBiet, NoiDung)
 VALUES 
-    (N'SP001', N'Áo sơ mi trắng', 29.99, 39.99, 50, 'M', N'Còn hàng'),
-    (N'SP002', N'Quần jean nam', 39.99, 49.99, 30, 'L', N'Còn hàng'),
-    (N'SP003', N'Áo khoác nữ', 49.99, 59.99, 40, 'S', N'Còn hàng'),
-    (N'SP004', N'Áo thun nam', 19.99, 29.99, 60, 'XL', N'Còn hàng'),
-    (N'SP005', N'Váy dài hoa nữ', 34.99, 44.99, 25, 'M', N'Hết hàng'),
-    (N'SP006', N'Quần short nam', 24.99, 34.99, 35, 'S', N'Còn hàng'),
-    (N'SP007', N'Áo len đỏ', 29.99, 39.99, 20, 'M', N'Còn hàng'),
-    (N'SP008', N'Áo khoác da nam', 59.99, 69.99, 15, 'L', N'Còn hàng');
+    ('CM001', NULL, 'Quần Áo Nam', 'Đặc biệt', 'Bộ sưu tập quần áo nam mới nhất'),
+    ('CM002', NULL, 'Quần Áo Nữ', NULL, 'Bộ sưu tập quần áo nữ mới nhất'),
+    ('CM003', NULL, 'Giày Thể Thao', NULL, 'Bộ sưu tập giày thể thao mới nhất');
+
+INSERT INTO SanPham (MaSP, MaCM, TenSP, GiaBan, GiamGia, SoLuong, Size, TrangThai, LuotXem)
+VALUES 
+    ('SP001', 'CM001', 'Áo thun nam', 250000, 0, 50, 'M', 'Còn hàng', 100),
+    ('SP002', 'CM002', 'Áo thun nữ', 220000, 0, 30, 'S', 'Còn hàng', 80),
+    ('SP003', 'CM001', 'Quần jean nam', 450000, 0, 40, '32', 'Còn hàng', 120),
+    ('SP004', 'CM002', 'Quần jean nữ', 420000, 0, 35, '28', 'Còn hàng', 90),
+    ('SP005', 'CM003', 'Giày thể thao nam', 600000, 0, 20, '42', 'Còn hàng', 60),
+    ('SP006', 'CM003', 'Giày thể thao nữ', 580000, 0, 25, '38', 'Còn hàng', 70),
+    ('SP007', 'CM002', 'Túi xách nữ', 350000, 0, 15, NULL, 'Còn hàng', 50),
+    ('SP008', 'CM001', 'Ví nam', 300000, 0, 18, NULL, 'Còn hàng', 40);
+
 SELECT*FROM SanPham
 
 INSERT INTO ChiTietSanPham (MaSP, MaNCC, MoTa, ChiTiet)

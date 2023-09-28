@@ -9,7 +9,7 @@ namespace DataModel
     public  class SanPhamModel
     {
         public string MaSP { get; set; }
-        public string TenTenSPKH { get; set; }
+        public string TenSP { get; set; }
         public string GiaBan { get; set; }
         public string GiaGoc { get; set; }
         public string SoLuong { get; set; }

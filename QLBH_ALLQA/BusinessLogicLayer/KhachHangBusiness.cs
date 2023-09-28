@@ -12,9 +12,9 @@ namespace BusinessLogicLayer
         {
             _res = res;
         }
-        public KhachHangModel GetDatabyId(string id)
+        public KhachHangModel GetDatabyId(string MaKH)
         {
-            return _res.GetDatabyId(id);
+            return _res.GetDatabyId(MaKH);
         }
         public bool Create_KhachHang(KhachHangModel model)
         {

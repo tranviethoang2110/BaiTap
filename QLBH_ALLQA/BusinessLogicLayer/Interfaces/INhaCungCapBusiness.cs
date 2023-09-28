@@ -9,7 +9,7 @@ namespace BusinessLogicLayer.Interfaces
 {
     public partial interface INhaCungCapBusiness
     {
-        NhaCungCapModel GetDatabyId(string ncc);
+        NhaCungCapModel GetDatabyId(string MaNCC);
         bool Create_NCC(NhaCungCapModel model);
         bool Update_NCC(NhaCungCapModel model);
         bool Delete_NCC(string ncc);
