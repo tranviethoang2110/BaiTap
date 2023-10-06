@@ -1,4 +1,54 @@
-﻿--Bảng Khách Hàng
+﻿--BẢNG LoaiTaiKhoan
+--hiển thị LoaiTaiKhoan theo id
+CREATE PROCEDURE sp_get_by_id
+	@MaLoai INT
+AS
+BEGIN
+	SELECT*FROM LoaiTaiKhoan AS ltk
+	WHERE ltk.MaLoai=@MaLoai
+END
+--Thêm LoaiTaiKhoan
+CREATE PROCEDURE sp_loaitaikhoan_create
+	@TenLoai NVARCHAR(50)
+AS
+BEGIN
+	INSERT INTO LoaiTaiKhoan(TenLoai)
+	VALUES(@TenLoai)
+END
+DROP PROCEDURE sp_loaitaikhoan_create
+--Sửa LoaiTaiKhoan
+CREATE PROCEDURE sp_loaitaikhoan_update
+	@MaLoai INT,
+	@TenLoai NVARCHAR(50)
+AS
+BEGIN
+	UPDATE LoaiTaiKhoan 
+	SET TenLoai=@TenLoai
+	WHERE MaLoai=@MaLoai
+END
+--XÓA LoaiTaiKhoan
+CREATE PROCEDURE sp_loaitaikhoan_delete
+    @MaLoai INT
+AS
+BEGIN
+	DELETE FROM LoaiTaiKhoan
+	WHERE MaLoai=@MaLoai
+END
+
+--Bảng TaiKhoan
+--hiển thị TaiKhoan
+CREATE PROCEDURE sp_DangNhap
+	@TenDangNhap NVARCHAR(50),
+	@MatKhau NVARCHAR(50)
+AS
+BEGIN
+	SELECT*FROM TaiKhoan
+	WHERE TaiKhoan.TenDangNhap=@TenDangNhap AND TaiKhoan.MatKhau=@MatKhau
+END
+EXEC sp_DangNhap 'admin1','admin1'
+SELECT*FROM TaiKhoan
+EXEC sp_DangNhap @TenDangNhap='admin1',@MatKhau='admin1'
+--Bảng Khách Hàng
 --hiển thị khách hàng theo mã khách hàng
 CREATE PROCEDURE sp_khach_get_by_maKh
 	@MaKH VARCHAR(10)
@@ -67,7 +117,7 @@ EXEC sp_khachhang_delete
 
 --tìm kiếm khách hàng bằng mã
 
-SELECT*FROM KhachHang
+SELECT*FROM ChuyenMuc
 
 --Bảng Nhà Cung Cấp
 --Hiển thị thông tin NhaCungCap theo mã ncc

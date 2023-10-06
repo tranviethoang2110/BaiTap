@@ -29,7 +29,7 @@ namespace API.BanHangQA.Controllers
             return model;
         }
         [Route("update-chuyenmuc")]
-        [HttpPost]
+        [HttpPut]
         public ChuyenMucModel Update_CM([FromBody] ChuyenMucModel model)
         {
             _chuyenmucBusiness.Update_CM(model);

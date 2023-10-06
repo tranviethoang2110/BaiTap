@@ -30,7 +30,7 @@ namespace API.BanHangQA.Controllers
         }
 
         [Route("update-ncc")]
-        [HttpPost]
+        [HttpPut]
         public NhaCungCapModel Update([FromBody] NhaCungCapModel model)
         {
             _nccBusiness.Update_NCC(model);

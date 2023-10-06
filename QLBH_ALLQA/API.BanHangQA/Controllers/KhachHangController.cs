@@ -31,7 +31,7 @@ namespace API.BanHangQA.Controllers
         }
 
         [Route("update-khachhang")]
-        [HttpPost]
+        [HttpPut]
         public KhachHangModel Update_KhachHang([FromBody] KhachHangModel model)
         {
             _khachHangBusiness.Update_KhachHang(model);

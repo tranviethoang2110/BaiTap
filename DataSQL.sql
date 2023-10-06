@@ -13,6 +13,8 @@ CREATE TABLE TaiKhoan
 	LoaiTaiKhoan INT FOREIGN KEY REFERENCES LoaiTaiKhoan(MaLoai) on delete cascade on update cascade,
 	TenDangNhap NVARCHAR(50),
 	MatKhau NVARCHAR(50),
+	Email NVARCHAR(50),
+	Token NVARCHAR(100),
 )
 CREATE TABLE NhaCungCap
 (
