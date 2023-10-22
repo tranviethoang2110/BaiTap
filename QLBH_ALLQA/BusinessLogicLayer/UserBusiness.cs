@@ -24,5 +24,17 @@ namespace BusinessLogicLayer
         {
             return _res.Login(taikhoan,matkhau);
         }
+        public bool Create_TaiKhoan(UserModel model)
+        {
+            return _res.Create_TaiKhoan(model);
+        }
+        public bool Update_TaiKhoan(UserModel model)
+        {
+            return _res.Update_TaiKhoan(model);
+        }
+        public bool Delete_TaiKhoan(int mtk)
+        {
+            return _res.Delete_TaiKhoan(mtk);
+        }
     }
 }

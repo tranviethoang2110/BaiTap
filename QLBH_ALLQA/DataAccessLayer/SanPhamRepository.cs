@@ -16,7 +16,7 @@ namespace DataAccessLayer
         {
             _dbHelper = dbHelper;
         }
-        public SanPhamModel GetDataByMaSp(string MaSP)
+        public SanPhamModel GetDataByMaSP(string MaSP)
         {
             string msgError = "";
             try
@@ -39,12 +39,14 @@ namespace DataAccessLayer
             {
                 var result = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_sanpham_create",
                     "@MaSP", model.MaSP,
+                    "@MaCM", model.MaCM,
                     "@TenSP", model.TenSP,
                     "@GiaBan", model.GiaBan,
-                    "@GiaGoc", model.GiaGoc,
+                    "@GiamGia", model.GiamGia,
                     "@SoLuong", model.SoLuong,
                     "@Size", model.Size,
-                    "@TrangTrai", model.TrangThai
+                    "@TrangThai", model.TrangThai,
+                    "@LuotXem", model.LuotXem
                     );
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
@@ -55,6 +57,53 @@ namespace DataAccessLayer
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+        }
+        public bool Update_SanPham(SanPhamModel model)
+        {
+            string msgError = "";
+            try
+            {
+                var result = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_sanpham_update",
+                    "@MaSP", model.MaSP,
+                    "@MaCM", model.MaCM,
+                    "@TenSP", model.TenSP,
+                    "@GiaBan", model.GiaBan,
+                    "@GiamGia", model.GiamGia,
+                    "@SoLuong", model.SoLuong,
+                    "@Size", model.Size,
+                    "@TrangThai", model.TrangThai,
+                    "@LuotXem", model.LuotXem
+                    );
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(Convert.ToString(result) + msgError); ;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public bool Delete_SanPham(string MaSP)
+        {
+            string msgError = "";
+            try
+            {
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_sanpham_delete",
+                    "@MaSP", MaSP
+                    );
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(Convert.ToString(result) + msgError);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

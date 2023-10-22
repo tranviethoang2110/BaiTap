@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Interfaces
+namespace BusinessLogicLayer.Interfaces
 {
-    public  partial interface  ISanPhamRepository
+     public  partial interface ISanPhamBusiness
     {
         SanPhamModel GetDataByMaSP(string MaSP);
         bool Create_SanPham(SanPhamModel model);

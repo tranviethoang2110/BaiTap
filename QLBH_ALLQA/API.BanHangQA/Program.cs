@@ -21,6 +21,8 @@ builder.Services.AddTransient<INhaCungCapRepository, NhaCungCapRepository>();
 builder.Services.AddTransient<INhaCungCapBusiness, NhaCungCapBusiness>();
 builder.Services.AddTransient<IChuyenMucRepository, ChuyenMucRepository>();
 builder.Services.AddTransient<IChuyenMucBusiness, ChuyenMucBusiness>();
+builder.Services.AddTransient<ISanPhamRepository, SanPhamRepository>();
+builder.Services.AddTransient<ISanPhamBusiness, SanPhamBusiness>();
 
 
 // Add services to the container.

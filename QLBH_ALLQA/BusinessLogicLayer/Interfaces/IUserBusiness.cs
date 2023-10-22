@@ -10,5 +10,9 @@ namespace BusinessLogicLayer.Interfaces
     public  partial interface IUserBusiness
     {
         bool Login(string taikhoan, string matkhau);
+
+        bool Create_TaiKhoan(UserModel model);
+        bool Update_TaiKhoan(UserModel model);
+        bool Delete_TaiKhoan(int mtk);
     }
 }

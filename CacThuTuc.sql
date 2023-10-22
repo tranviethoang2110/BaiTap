@@ -45,9 +45,47 @@ BEGIN
 	SELECT*FROM TaiKhoan
 	WHERE TaiKhoan.TenDangNhap=@TenDangNhap AND TaiKhoan.MatKhau=@MatKhau
 END
-EXEC sp_DangNhap 'admin1','admin1'
-SELECT*FROM TaiKhoan
 EXEC sp_DangNhap @TenDangNhap='admin1',@MatKhau='admin1'
+--Thêm TaiKhoan
+ALTER PROCEDURE sp_taikhoan_create
+	@LoaiTaiKhoan INT,
+	@TenDangNhap NVARCHAR(50),
+	@MatKhau NVARCHAR(50),
+	@Email NVARCHAR(50),
+	@Token NVARCHAR(100)
+AS
+BEGIN
+	INSERT INTO TaiKhoan (LoaiTaiKhoan,TenDangNhap, MatKhau,Email,Token)
+    VALUES (@LoaiTaiKhoan,@TenDangNhap,@MatKhau,@Email,@Token)
+END
+--Sửa TaiKhoan
+ CREATE PROCEDURE sp_taikhoan_update
+	@MaTaiKhoan INT,
+    @LoaiTaiKhoan INT,
+	@TenDangNhap NVARCHAR(50),
+	@MatKhau NVARCHAR(50),
+	@Email NVARCHAR(50),
+	@Token NVARCHAR(100)
+AS
+BEGIN
+    UPDATE TaiKhoan
+    SET LoaiTaiKhoan = @LoaiTaiKhoan,
+        TenDangNhap = @TenDangNhap,
+        MatKhau = @MatKhau,
+        Email = @Email,
+        Token = @Token
+    WHERE MaTaiKhoan = @MaTaiKhoan
+END
+--Xóa TaiKhoan
+CREATE PROCEDURE sp_taikhoan_delete
+    @MaTaiKhoan INT
+AS
+BEGIN
+	DELETE FROM TaiKhoan
+	WHERE TaiKhoan.MaTaiKhoan=@MaTaiKhoan
+END
+
+SELECT*FROM TaiKhoan
 --Bảng Khách Hàng
 --hiển thị khách hàng theo mã khách hàng
 CREATE PROCEDURE sp_khach_get_by_maKh
@@ -255,6 +293,7 @@ EXEC [dbo].[sp_khach_search]
 Select*from KhachHang
 
 --BẢNG CHUYÊN MỤC
+--Lấy chuyên mục
 CREATE PROCEDURE sp_cm_get_by_cm
 	@MaCM VARCHAR(10)
 AS
@@ -264,6 +303,7 @@ BEGIN
 END
 DROP PROCEDURE sp_cm_get_by_cm
 EXEC sp_cm_get_by_cm @MaCM='CM001'
+
 --thêm chuyên mục
 CREATE PROCEDURE sp_chuyenmuc_create
     @MaCM VARCHAR(10), 
@@ -310,3 +350,69 @@ END
 
 EXEC sp_chuyenmuc_delete @MaCM='CM008'
 SELECT*FROM ChuyenMuc
+
+--Bảng SanPham
+
+CREATE PROCEDURE sp_msp_get_by_sp
+	@MaSP NVARCHAR(10)
+AS
+BEGIN
+	SELECT*FROM SanPham AS sp
+	WHERE sp.MaSP=@MaSP
+END
+DROP PROCEDURE sp_msp_get_by_sp
+EXEC sp_msp_get_by_sp 'SP001'
+
+--Thêm SanPham
+
+CREATE PROCEDURE sp_sanpham_create
+	@MaSP NVARCHAR(10),
+    @MaCM VARCHAR(10), 
+	@TenSP NVARCHAR(50), 
+	@GiaBan FLOAT,
+	@GiamGia FLOAT,
+	@SoLuong INT,
+	@Size CHAR(3),
+	@TrangThai NVARCHAR(50),
+	@LuotXem FLOAT
+AS
+BEGIN
+    INSERT INTO SanPham (MaSP,MaCM,TenSP,GiaBan,GiamGia,SoLuong,Size,TrangThai,LuotXem)
+    VALUES (@MaSP,@MaCM, @TenSP,@GiaBan,@GiamGia,@SoLuong,@Size,@TrangThai,@LuotXem)
+END
+--Sửa SanPham
+
+CREATE PROCEDURE sp_sanpham_update
+    @MaSP NVARCHAR(10),
+    @MaCM VARCHAR(10), 
+	@TenSP NVARCHAR(50), 
+	@GiaBan FLOAT,
+	@GiamGia FLOAT,
+	@SoLuong INT,
+	@Size CHAR(3),
+	@TrangThai NVARCHAR(50),
+	@LuotXem FLOAT
+AS
+BEGIN
+    UPDATE SanPham
+    SET MaCM = @MaCM,
+        TenSP = @TenSP,
+        GiaBan = @GiaBan,
+		GiamGia=@GiamGia,
+		SoLuong = @SoLuong,
+		Size=@Size,
+		TrangThai = @TrangThai,
+		LuotXem = @LuotXem
+    WHERE MaSP = @MaSP
+END
+
+--Xóa SanPham
+CREATE PROCEDURE sp_sanpham_delete
+    @MaSP NVARCHAR(10)
+AS
+BEGIN
+	DELETE FROM SanPham
+	WHERE SanPham.MaSP=@MaSP
+END
+EXEC sp_sanpham_delete @MaSP='CM008'
+SELECT*FROM SanPham
