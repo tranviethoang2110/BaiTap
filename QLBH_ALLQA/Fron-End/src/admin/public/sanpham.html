@@ -1,0 +1,47 @@
+<div class="blockTable">
+<h3 class="title_manage">Quản lý sản phẩm</h3>
+<button class="addnew" ng-click="showAddSP()"> Thêm mới</button>
+<div class="taskbar">   
+        <input type="text" class="search" style="height: 29px;width: 200px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập từ khóa tìm kiếm" ng-model="txtSearchTenSanPham">
+        <button style="width: 90px;height: 30px;border-radius: 5px;cursor: pointer;" ng-click="clickSearch()">Search</button>
+      
+</div>
+<table  border="1" cellspacing="0" cellpadding="5" class="table_header">
+    <thead>
+        <td style="width: 5%;height: 19px;">Mã SP</td> 
+        <td style="width: 7%">Mã CM</td>
+        <td style="width: 18%;" >Tên sản phẩm</td>
+        <td style="width: 8%">Giá Bán</td>
+        <td style="width: 7%">Giảm Giá</td>   
+        <td style="width: 7%;">Số lượng</td>
+        <td style="width: 7%;">Size</td>  
+        <td style="width: 10%;">Trạng thái</td>
+        <td style="width: 7%;">Lượt Xem</td>
+        <td style="width: 14%;">Chức năng</td>        
+    </thead>
+</table>
+<div class="table_content">
+    <table  border="1" cellspacing="0" cellpadding="5" >
+        <tr ng-repeat="x in listItem">
+            <td style="width: 5%;height: 19px;">{{x.maSP}}</td>
+            <td style="width: 7%;">{{x.maCM}}</td>
+            <td style="width: 18%;" >{{x.tenSP}}</td>        
+            <td style="width: 8%;">{{x.giaBan}}</td>
+            <td style="width: 7%;">{{x.giamGia}}</td>        
+            <td style="width: 7%;">{{x.soLuong}}</td>
+            <td style="width: 7%;">{{x.size}}</td>
+            <td style="width: 10%;">{{x.trangThai}}</td>
+            <td style="width: 7%;">{{x.luotXem}}</td>
+            <td style="width: 14%;">
+                <button class="task" ng-click="editsp(x)"><i class="fa-solid fa-wrench"></i></button>
+                <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button>
+                <button class="task" ng-click="deleteSP(x) "><i class="fa-solid fa-delete-left"></i></button>
+            </td>  
+        </tr>
+    </table>
+</div>
+ <div class="nextpage" style="float: right;margin-right: 3%;">
+    <button ng-click="page_prev()" ng-disabled="pageprev" >Trang trước</button>
+    <button ng-click="page_after()" ng-disabled="pageafter">Trang sau</button>
+ </div>
+

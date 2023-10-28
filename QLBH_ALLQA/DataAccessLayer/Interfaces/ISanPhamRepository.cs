@@ -13,5 +13,7 @@ namespace DataAccessLayer.Interfaces
         bool Create_SanPham(SanPhamModel model);
         bool Update_SanPham(SanPhamModel model);
         bool Delete_SanPham(string MaSP);
+        List<SanPhamModel> SearchSP(int pageIndex, int pageSize, out int total, string TenSP, string GiaBan);
+        List<SanPhamModel> SearchALL();
     }
 }

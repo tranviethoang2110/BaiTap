@@ -32,5 +32,13 @@ namespace BusinessLogicLayer
         {
             return _res.Delete_SanPham(MaSP);
         }
+        public List<SanPhamModel> SearchSP(int pageIndex, int pageSize, out int total, string TenSP, string GiaBan)
+        {
+            return _res.SearchSP(pageIndex, pageSize, out total, TenSP, GiaBan);
+        }
+        public List<SanPhamModel> SearchALL()
+        {
+            return _res.SearchALL();
+        }
     }
 }

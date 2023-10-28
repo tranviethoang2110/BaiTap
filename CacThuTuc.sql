@@ -381,6 +381,12 @@ BEGIN
     VALUES (@MaSP,@MaCM, @TenSP,@GiaBan,@GiamGia,@SoLuong,@Size,@TrangThai,@LuotXem)
 END
 --Sửa SanPham
+--lấy tất cả sanpham
+CREATE PROCEDURE sp_Search_sanpham
+AS
+BEGIN
+	SELECT*FROM SanPham
+END
 
 CREATE PROCEDURE sp_sanpham_update
     @MaSP NVARCHAR(10),
@@ -416,3 +422,51 @@ BEGIN
 END
 EXEC sp_sanpham_delete @MaSP='CM008'
 SELECT*FROM SanPham
+
+ALTER PROCEDURE sp_TimKiemVaPhanTrang
+    @page_index INT,
+    @page_size INT,
+    @ten_sanpham NVARCHAR(250) ,
+    @gia_tien VARCHAR(50) 
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @page_size = 0
+    BEGIN
+        SELECT
+            ROW_NUMBER() OVER (ORDER BY MaSP ASC) AS RowNumber, 
+          sp.*
+        FROM SanPham AS sp
+        WHERE
+            (@ten_sanpham ='' OR sp.TenSP LIKE '%' + @ten_sanpham + '%')
+            AND (@gia_tien ='' OR sp.GiaBan LIKE '%' + @gia_tien + '%');
+  
+    END
+    ELSE
+    BEGIN
+        DECLARE @RecordCount INT;
+        
+        SELECT
+            ROW_NUMBER() OVER (ORDER BY MaSP ASC) AS RowNumber, 
+            sp.*
+        INTO #Results
+        FROM SanPham AS sp
+        WHERE
+            (@ten_sanpham ='' OR sp.TenSP LIKE '%' + @ten_sanpham + '%')
+            AND (@gia_tien ='' OR sp.GiaBan LIKE '%' + @gia_tien + '%');
+        SELECT @RecordCount = COUNT(*)
+        FROM #Results;
+
+        SELECT
+            *,
+            @RecordCount AS RecordCount
+        FROM #Results
+        WHERE
+            RowNumber BETWEEN (@page_index - 1) * @page_size + 1
+            AND ((@page_index - 1) * @page_size + 1) + @page_size - 1
+            OR @page_index = -1;
+        
+        DROP TABLE #Results;
+    END;
+END;

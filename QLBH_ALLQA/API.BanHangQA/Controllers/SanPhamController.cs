@@ -42,5 +42,38 @@ namespace API.BanHangQA.Controllers
             _spBusiness.Delete_SanPham(MaSP);
             return Ok();
         }
+        [Route("search_SP")]
+        [HttpPost]
+        public IActionResult SearchSanPham([FromBody] Dictionary<string, object> ch)
+        {
+            try
+            {
+                int page = ch.ContainsKey("page") ? Convert.ToInt32(ch["page"].ToString()) : 1;
+                int pageSize = ch.ContainsKey("pageSize") ? Convert.ToInt32(ch["pageSize"].ToString()) : 10;
+                string tenSanPham = ch.ContainsKey("TenSP") ? Convert.ToString(ch["TenSP"].ToString()) : "";
+                string giatien = ch.ContainsKey("GiaBan") ? Convert.ToString(ch["GiaBan"].ToString()) : "";
+
+                int total = 0;
+                var data = _spBusiness.SearchSP(page, pageSize, out total, tenSanPham, giatien);
+
+                return Ok(new
+                {
+                    TotalItems = total,
+                    Data = data,
+                    Page = page,
+                    PageSize = pageSize
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Lỗi: {ex.Message}");
+            }
+        }
+        [Route("ALLSP")]
+        [HttpGet]
+        public List<SanPhamModel> SearchALL() 
+        {
+            return _spBusiness.SearchALL();
+        }
     }
 }
